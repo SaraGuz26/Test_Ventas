@@ -13,5 +13,5 @@ function cancelarVenta(ventaId, estadoActual) {
     }
     return `Venta ${ventaId} cancelada`;
 }
-
+ //prueba
 module.exports = { crearVenta, cancelarVenta };

@@ -1,6 +1,11 @@
 name: CI/CD Pipeline
 
 on:
+
+  push:
+      branches:
+        - develop
+        
   pull_request:
     branches:
       - develop
@@ -48,7 +53,11 @@ jobs:
 
 
       - name: Run unit tests
+<<<<<<< HEAD
         run: npm run test
+=======
+        run: npx run test
+>>>>>>> 51a1bb118e544d7c9db753e45c753bb21455ae4a
 
 
   integration-tests:

@@ -1,12 +1,13 @@
 name: CI/CD Pipeline
 
 on:
+
+  pull_request:
+      branches:
+        - develop    
   #push:
   #   branches:
   #    - develop
-  pull_request:
-    branches:
-      - develop
 
 jobs:
 #Para el formato del codigo
@@ -51,6 +52,7 @@ jobs:
 
 
       - name: Run unit tests
+
         run: npm run test
 
 
@@ -117,21 +119,21 @@ jobs:
 
       - name: Build app
         run: npm run build
-        
-      - name: Set PR Status
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { context } = require('@actions/github');
-            const state = "success"; // o "failure"
-            const description = state === "success" ? "Build and tests passed." : "Build or tests failed.";
-            await github.repos.createCommitStatus({
-              ...context.repo,
-              sha: context.payload.pull_request.head.sha,
-              state,
-              description,
-              context: "CI Pipeline",
-            });
 
- 
+  #deploy:
+   # name: Deploy to Firebase
+    #runs-on: ubuntu-latest
+    #Condicionamos a que el merge sea ok en la rama develop
+    #if: github.ref == 'refs/heads/develop' && github.event.pull_request.merged == true
+    #steps:
+     # - name: Checkout code
+      #  uses: actions/checkout@v2
+
+     # - name: Set up Firebase CLI
+     #   uses: w9jds/firebase-action@v1
+     #   with:
+     #     args: deploy --only hosting
+     #   env:
+     #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        
+

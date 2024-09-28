@@ -120,20 +120,20 @@ jobs:
       - name: Build app
         run: npm run build
 
-  #deploy:
-   # name: Deploy to Firebase
-    #runs-on: ubuntu-latest
+  deploy:
+    name: Deploy to Firebase
+    runs-on: ubuntu-latest
     #Condicionamos a que el merge sea ok en la rama develop
     #if: github.ref == 'refs/heads/develop' && github.event.pull_request.merged == true
-    #steps:
-     # - name: Checkout code
-      #  uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-     # - name: Set up Firebase CLI
-     #   uses: w9jds/firebase-action@v1
-     #   with:
-     #     args: deploy --only hosting
-     #   env:
-     #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy to Firebase
+        run: ${{ 1//0hkpilaOAE0hCCgYIARAAGBESNgF-L9Ir4Eg-w74Gy2vqu8cBJMZIff0z9N9hnM8hqxwo24w_0mLw2-ap-qkeRPWVYHHmm26ruA }}
+        
         
 

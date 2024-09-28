@@ -1,10 +1,10 @@
-name: CI/CD Pipeline
+name: deploy with merge
 
 on:
 
   pull_request:
       branches:
-        -  production    
+        - develop    
   #push:
   #   branches:
   #    - develop
@@ -121,16 +121,18 @@ jobs:
         run: npm run build
 
   deploy:
-    name: Deploy to Firebase
-    runs-on: ubuntu-latest
+   name: Deploy to Firebase
+   runs-on: ubuntu-latest
     #Condicionamos a que el merge sea ok en la rama develop
-    #if: github.ref == 'refs/heads/develop' && github.event.pull_request.merged == true
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Deploy to Firebase
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: firebase deploy --only hosting
-          
+   if: github.ref == 'refs/heads/develop' && github.event.pull_request.merged == true
+   steps:
+         - name: Checkout code
+           uses: actions/checkout@v2
+  
+         - name: Set up Firebase CLI
+           uses: w9jds/firebase-action@v1
+           with:
+              args: deploy --only hosting
+           env:
+            FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        

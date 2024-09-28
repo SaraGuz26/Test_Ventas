@@ -135,5 +135,4 @@ jobs:
       - name: Deploy to Firebase
         run: ${{ 1//0hkpilaOAE0hCCgYIARAAGBESNgF-L9Ir4Eg-w74Gy2vqu8cBJMZIff0z9N9hnM8hqxwo24w_0mLw2-ap-qkeRPWVYHHmm26ruA }}
         
-        
 

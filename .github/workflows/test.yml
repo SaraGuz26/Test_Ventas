@@ -120,17 +120,4 @@ jobs:
       - name: Build app
         run: npm run build
 
-  deploy:
-    name: Deploy to Firebase
-    runs-on: ubuntu-latest
-    #Condicionamos a que el merge sea ok en la rama develop
-    #if: github.ref == 'refs/heads/develop' && github.event.pull_request.merged == true
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Deploy to Firebase
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: firebase deploy --only hosting
           
